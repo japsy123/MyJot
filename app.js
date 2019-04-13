@@ -10,6 +10,9 @@ mongoose.connect("mongodb://localhost/myjot", {useNewUrlParser: true})
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+app.get("/ideas/add", (req,res)=> {
+    res.render("ideas/add")
+})
 app.get("/", (req,res)=> {
     res.render("index")
 })
@@ -18,6 +21,8 @@ app.get("/", (req,res)=> {
 app.get("/about", (req,res) => {
     res.render("about")
 })
+
+
 
 
 app.listen(port, () => {
