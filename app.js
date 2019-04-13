@@ -1,9 +1,12 @@
 const express = require("express");
 const app = express();
-var exphbs  = require('express-handlebars');
+const exphbs  = require('express-handlebars');
+const mongoose = require("mongoose");
 
 const port = 5000;
+mongoose.Promise = global.Promise;
 
+mongoose.connect("mongodb://localhost/myjot", {useNewUrlParser: true})
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
