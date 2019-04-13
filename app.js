@@ -17,6 +17,15 @@ app.get("/ideas/add", (req,res)=> {
     res.render("ideas/add")
 })
 
+app.get("/ideas", (req,res) => {
+    Idea.find( {})
+    .sort({date:"desc"})
+    .then(ideas => {
+        res.render("ideas/index", {
+            ideas: ideas
+        })
+    })
+})
 app.post("/ideas", (req,res)=> {
     console.log(req.body)
     const errors = [];
