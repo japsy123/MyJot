@@ -8,12 +8,12 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 app.get("/", (req,res)=> {
-    res.send("Index")
+    res.render("index")
 })
 
 
 app.get("/about", (req,res) => {
-    res.send("about")
+    res.render("about")
 })
 
 
