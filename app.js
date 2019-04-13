@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const exphbs  = require('express-handlebars');
 const mongoose = require("mongoose");
-
+const Idea = require("./models/Myjot")
 const port = 5000;
 mongoose.Promise = global.Promise;
 
