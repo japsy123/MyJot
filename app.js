@@ -4,12 +4,14 @@ const exphbs  = require('express-handlebars');
 const mongoose = require("mongoose");
 const Idea = require("./models/Myjot")
 const bodyParser = require("body-parser");
+const methodOverride = require("method-override")
 mongoose.Promise = global.Promise;
 
 mongoose.connect("mongodb://localhost/myjot", {  useMongoClient: true,
 useNewUrlParser: true})
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json())
+app.use(methodOverride("_method"));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
@@ -78,7 +80,19 @@ app.post("/ideas", (req,res)=> {
 })
 
 
-
+// Update form
+app.put("/ideas/:id", (req,res) => {
+    
+    Idea.findOne({
+        _id: req.params.id
+    }).then(ideas => {
+        ideas.title = req.body.title,
+        ideas.details = req.body.details,
+        ideas.save().then(ideas => {
+            res.redirect("/ideas")
+        })
+    })
+})
 const port = 3000;
 
 
