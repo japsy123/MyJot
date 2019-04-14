@@ -93,6 +93,16 @@ app.put("/ideas/:id", (req,res) => {
         })
     })
 })
+
+// Delete form
+app.delete("/ideas/:id", (req,res)=> {
+
+    Idea.remove({
+        _id:req.params.id
+    }, () => {
+        res.redirect("/ideas")
+    }
+)})
 const port = 3000;
 
 
