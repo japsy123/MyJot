@@ -12,7 +12,14 @@ router.get("/login", (req,res) => {
 router.get("/register", (req,res) => {
     res.render("users/register")
 })
-
+// Login Form POST
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', {
+      successRedirect:'/ideas',
+      failureRedirect: '/login',
+      failureFlash: true
+    })(req, res, next);
+  });
 router.post("/user/register", (req,res) => {
     const errors = [];
     console.log(req.body.password.length)

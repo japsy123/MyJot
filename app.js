@@ -10,7 +10,12 @@ const flash = require("connect-flash");
 const ideas = require("./routes/ideas");
 const path = require("path");
 const user = require("./routes/user");
+const passport = require("passport");
 mongoose.Promise = global.Promise;
+
+
+// Passport Config
+require('./config/passport')(passport);
 
 mongoose.connect("mongodb://localhost/myjot", {  useMongoClient: true,
 useNewUrlParser: true})
@@ -38,8 +43,6 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use(ideas);
 app.use(user);
-
-
 
 app.get("/", (req,res)=> {
     res.render("index")
