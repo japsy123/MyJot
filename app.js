@@ -11,13 +11,14 @@ const ideas = require("./routes/ideas");
 const path = require("path");
 const user = require("./routes/user");
 const passport = require("passport");
+const db  = require("./config/database");
 mongoose.Promise = global.Promise;
 
 
 // Passport Config
 require('./config/passport')(passport);
 
-mongoose.connect("mongodb://localhost/myjot", {  useMongoClient: true,
+mongoose.connect(db.mongoURI, { useMongoClient: true,
 useNewUrlParser: true})
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(session({
@@ -57,7 +58,7 @@ app.get("/about", (req,res) => {
     res.render("about")
 })
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 
 app.listen(port, () => {
